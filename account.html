@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            background: url('https://www.wallpaperflare.com/static/87/981/130/space-planet-universe-galaxy-wallpaper.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cinzel', serif;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #FFD700;
+        }
+        .account {
+            margin-top: 6rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+        .account input {
+            margin-top: 1rem;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+        .account img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            margin-top: 1rem;
+            border-radius: 50%;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #FFD700;
+        }
+        .back-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="upload.html">Upload</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button class="back-button" onclick="goBack()">&#8592; Back</button>
+    <main>
+        <section class="account">
+            <form id="accountForm">
+                <label for="nameInput">Name:</label>
+                <input type="text" id="nameInput" required>
+                <label for="passwordInput">Password:</label>
+                <input type="password" id="passwordInput" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <div id="profilePicSection" style="display: none;">
+                <label>Select a profile picture:</label>
+                <input type="file" id="profilePicInput" accept="image/*">
+                <img id="profilePic" src="#" alt="Profile Picture" style="display:none;">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <a href="#" onclick="promptAdminPassword()">Made by Daddy</a>
+    </footer>
+    <script>
+        document.getElementById('accountForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            const password = document.getElementById('passwordInput').value;
+            // Implement the account creation functionality
+            alert(`Account created for ${name}`);
+            // Auto-save the password on the device
+            localStorage.setItem('userPassword', password);
+            // Show profile picture selection section
+            document.getElementById('profilePicSection').style.display = 'block';
+        });
+
+        document.getElementById('profilePicInput').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('profilePic').src = e.target.result;
+                    document.getElementById('profilePic').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function promptAdminPassword() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') {
+                alert('Access granted!');
+            } else {
+                alert('Access denied!');
+            }
+        }
+    </script>
+</body>
+</html>

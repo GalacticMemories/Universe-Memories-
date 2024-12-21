@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Upload</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            background: url('https://www.wallpaperflare.com/static/87/981/130/space-planet-universe-galaxy-wallpaper.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cinzel', serif;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #FFD700;
+        }
+        .upload-section {
+            margin-top: 6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .upload-section input[type="file"] {
+            display: none;
+        }
+        .upload-section label {
+            padding: 1rem;
+            background: #333;
+            border: 1px solid white;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .upload-section label:hover {
+            background: #555;
+        }
+        .upload-section button {
+            margin-top: 1rem;
+            padding: 0.5rem 2rem;
+            background: #333;
+            border: 1px solid white;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .upload-section button:hover {
+            background: #555;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #FFD700;
+        }
+        .back-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="photos.html">Photos</a></li>
+                <li><a href="albums.html">Albums</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+    <button class="back-button" onclick="goBack()">&#8592; Back</button>
+    <main>
+        <section class="upload-section">
+            <label for="file-upload">Choose Files to Upload</label>
+            <input type="file" id="file-upload" multiple>
+            <button onclick="uploadFiles()">Upload</button>
+        </section>
+    </main>
+    <footer>
+        <a href="#" onclick="promptAdminPassword()">Made by Daddy</a>
+    </footer>
+    <script>
+        function uploadFiles() {
+            const files = document.getElementById('file-upload').files;
+            if (files.length === 0) {
+                alert('Please select files to upload.');
+                return;
+            }
+            // Implement file upload functionality
+            alert(`Uploading ${files.length} files.`);
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function promptAdminPassword() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') {
+                alert('Access granted!');
+            } else {
+                alert('Access denied!');
+            }
+        }
+    </script>
+</body>
+</html>
